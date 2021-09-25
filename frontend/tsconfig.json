@@ -1,0 +1,13 @@
+{
+  "include": ["src", "tests"],
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom"],
+    "jsx": "react",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "outDir": "dist",
+  }
+}
