@@ -8,7 +8,7 @@ export function Header(): JSX.Element {
     <Navbar colorVariant="primary">
       <Navbar.Brand>
         <Navbar.Item renderAs={NavLink} to="/">
-          <img src="/brand.svg" /> Mini Invoices
+          <img src="/brand.svg" className="mr-2" /> Mini Invoices
         </Navbar.Item>
       </Navbar.Brand>
       <Navbar.Menu>
