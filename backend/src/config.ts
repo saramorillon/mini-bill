@@ -19,7 +19,6 @@ const env = cleanEnv(process.env, {
   APP_PORT: num({ default: 80 }),
   LOG_LEVEL: enm({ choices: ['debug', 'info', 'warn', 'error'], default: 'info' }),
   SESSION_DIR: str(),
-  UPLOAD_DIR: str(),
   COOKIE_DOMAIN: str(),
 })
 
@@ -29,7 +28,6 @@ interface IConfig {
   keys: string[]
   logLevel: 'debug' | 'info' | 'warn' | 'error'
   session: SessionOptions
-  uploadDir: string
 }
 
 const FileStore = filestore(session)
@@ -47,5 +45,4 @@ export const config: IConfig = {
     name: 'sid',
     cookie: { domain: env.COOKIE_DOMAIN, httpOnly: false, secure: false },
   },
-  uploadDir: env.UPLOAD_DIR,
 }
