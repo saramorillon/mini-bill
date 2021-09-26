@@ -5,6 +5,7 @@ import { hasSession } from './middlewares/session'
 import { getSession } from './controllers/session/getSession'
 import { getVersion } from './controllers/version/getVersion'
 import { getUsers } from './controllers/users/getUsers'
+import { getUser } from './controllers/users/getUser'
 
 export const router = Router()
 
@@ -17,3 +18,4 @@ router.get('/logout', logout)
 router.get('/session', getSession)
 
 router.get('/users', getUsers)
+router.get('/users/:id', getUser)

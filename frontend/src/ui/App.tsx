@@ -6,6 +6,7 @@ import { Header } from './components/Header/Header'
 import { PrivateRoute, PublicRoute } from './components/Route/Route'
 import { Home } from './pages/Home/Home'
 import { Login } from './pages/Login/Login'
+import { User } from './pages/Users/User'
 import { Users } from './pages/Users/Users'
 
 export function App(): JSX.Element | null {
@@ -19,6 +20,7 @@ export function App(): JSX.Element | null {
             <Switch>
               <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute exact path="/users" component={Users} />
+              <PrivateRoute exact path="/user/:id?" component={User} />
             </Switch>
             <Footer />
           </Route>
