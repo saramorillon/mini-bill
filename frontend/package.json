@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "poi --prod",
-    "watch": "poi --watch",
+    "serve": "poi --serve",
     "test": "jest --runInBand",
     "format": "prettier 'src/**/*.{ts,tsx}' --write",
     "lint": "eslint 'src/**/*.{ts,tsx}'"
