@@ -1,19 +1,30 @@
 import React from 'react'
-import { BrowserRouter, Switch } from 'react-router-dom'
+import { Container } from 'react-bulma-components'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { SessionProvider } from '../contexts/SessionContext'
+import { Footer } from './components/Footer/Footer'
+import { Header } from './components/Header/Header'
 import { PrivateRoute, PublicRoute } from './components/Route/Route'
 import { Home } from './pages/Home/Home'
 import { Login } from './pages/Login/Login'
 
 export function App(): JSX.Element | null {
   return (
-    <SessionProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <SessionProvider>
         <Switch>
           <PublicRoute exact path="/login" component={Login} />
-          <PrivateRoute exact path="/" component={Home} />
+          <Route>
+            <Header />
+            <Container>
+              <Switch>
+                <PrivateRoute exact path="/" component={Home} />
+              </Switch>
+            </Container>
+            <Footer />
+          </Route>
         </Switch>
-      </BrowserRouter>
-    </SessionProvider>
+      </SessionProvider>
+    </BrowserRouter>
   )
 }
