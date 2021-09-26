@@ -32,7 +32,7 @@ createConnection().then(() => {
     res.locals.user = req.user
     next()
   })
-  app.use(router)
+  app.use('/api', router)
   app.listen(config.port, () => {
     logger.info('app_start', { port: config.port })
   })
