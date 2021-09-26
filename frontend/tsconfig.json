@@ -5,9 +5,10 @@
     "module": "commonjs",
     "lib": ["dom"],
     "jsx": "react",
+    "outDir": "dist",
+    "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,
-    "downlevelIteration": true,
-    "outDir": "dist",
+    "downlevelIteration": true
   }
 }
