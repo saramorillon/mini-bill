@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { ISession } from '../models/ISession'
+import { IUser } from '../models/IUser'
 import { Axios } from './Axios'
 
-export async function getSession(): Promise<ISession | null> {
+export async function getSession(): Promise<IUser | null> {
   return axios
-    .get<ISession>('/api/session', { withCredentials: true })
+    .get<IUser>('/api/session', { withCredentials: true })
     .then((res) => res.data)
     .catch(() => null)
 }

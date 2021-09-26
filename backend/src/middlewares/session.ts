@@ -5,7 +5,7 @@ export function hasSession() {
     if (req.isAuthenticated()) {
       next()
     } else {
-      res.redirect('/login')
+      res.sendStatus(401)
     }
   }
 }
