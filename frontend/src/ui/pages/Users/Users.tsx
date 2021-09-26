@@ -1,5 +1,6 @@
 import React from 'react'
-import { Box, Heading, Hero, Level, Section } from 'react-bulma-components'
+import { Button, Heading, Hero, Icon, Section, Table } from 'react-bulma-components'
+import { Edit3, Plus } from 'react-feather'
 import { NavLink } from 'react-router-dom'
 import { useFetch } from '../../../hooks/useFetch'
 import { getUsers } from '../../../services/users'
@@ -16,21 +17,44 @@ export function Users(): JSX.Element {
         </Hero.Body>
       </Hero>
       <Section>
+        <AddUser />
         <LoadContainer loading={loading}>
-          {users.map((user) => (
-            <Box key={user.id}>
-              <Level>
-                <Level.Item justifyContent="left">
-                  <Heading>{user.username}</Heading>
-                </Level.Item>
-                <Level.Item justifyContent="right">
-                  <NavLink to={`/user/${user.id}`}>Edit</NavLink>
-                </Level.Item>
-              </Level>
-            </Box>
-          ))}
+          <Table striped bordered size="fullwidth">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td width="100%">{user.username}</td>
+                  <td>
+                    <Button renderAs={NavLink} to={`/user/${user.id}`} size="small" color="ghost" outlined>
+                      <Icon size="small">
+                        <Edit3 size={14} />
+                      </Icon>
+                      <span>Edit</span>
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </LoadContainer>
       </Section>
     </>
+  )
+}
+
+function AddUser() {
+  return (
+    <Button renderAs={NavLink} to="/user" color="primary" outlined className="mb-2">
+      <Icon size="small">
+        <Plus />
+      </Icon>
+      <span>Create user</span>
+    </Button>
   )
 }
