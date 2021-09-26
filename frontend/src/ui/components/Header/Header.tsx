@@ -12,6 +12,11 @@ export function Header(): JSX.Element {
         </Navbar.Item>
       </Navbar.Brand>
       <Navbar.Menu>
+        <Navbar.Container>
+          <Navbar.Item renderAs={NavLink} to="/users">
+            Users
+          </Navbar.Item>
+        </Navbar.Container>
         <Navbar.Container align="right">
           <Navbar.Item onClick={logout}>Logout</Navbar.Item>
         </Navbar.Container>
