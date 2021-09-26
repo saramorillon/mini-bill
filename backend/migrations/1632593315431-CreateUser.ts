@@ -8,7 +8,7 @@ export class CreateUser1632593315431 implements MigrationInterface {
         CREATE TABLE user (
             id int NOT NULL AUTO_INCREMENT,
             username varchar(40) NOT NULL,
-            password char(64) NOT NULL,
+            password char(56) NOT NULL,
             created_at datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
             updated_at datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
             UNIQUE INDEX IDX_78a916df40e02a9deb1c4b75ed (username),

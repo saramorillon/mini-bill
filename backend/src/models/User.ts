@@ -20,7 +20,7 @@ export class User {
   @Column({ length: 40, unique: true })
   username: string
 
-  @Column('char', { length: 64 })
+  @Column('char', { length: 56 })
   password: string
 
   @CreateDateColumn()
