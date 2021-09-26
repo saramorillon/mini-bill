@@ -1,22 +1,30 @@
-import { cleanEnv, num, str } from 'envalid'
+import { cleanEnv, makeValidator, num, Spec, str } from 'envalid'
 import session, { SessionOptions } from 'express-session'
 import filestore from 'session-file-store'
 
-const env = cleanEnv(
-  process.env,
-  {
-    APP_KEY: str(),
-    APP_PORT: num({ default: 80 }),
-    LOG_LEVEL: str({ choices: ['debug', 'info', 'warn', 'error'], default: 'info' }),
-    SESSION_DIR: str(),
-    UPLOAD_DIR: str(),
-    COOKIE_DOMAIN: str(),
-  },
-  { dotEnvPath: null }
-)
+function enm<T extends string>(spec: Spec<T>) {
+  return makeValidator((input: string) => {
+    if (isEnum(input, spec.choices)) return input
+    throw new Error(`Invalid log level: "${input}"`)
+  })(spec)
+}
+
+function isEnum<T extends string>(input: string, choices?: ReadonlyArray<T>): input is T {
+  return choices?.length && choices.map(String).includes(input)
+}
+
+const env = cleanEnv(process.env, {
+  NODE_ENV: enm({ choices: ['development', 'test', 'production'], default: 'production' }),
+  APP_KEY: str(),
+  APP_PORT: num({ default: 80 }),
+  LOG_LEVEL: enm({ choices: ['debug', 'info', 'warn', 'error'], default: 'info' }),
+  SESSION_DIR: str(),
+  UPLOAD_DIR: str(),
+  COOKIE_DOMAIN: str(),
+})
 
 interface IConfig {
-  environment?: string
+  environment: 'development' | 'test' | 'production'
   port: number
   keys: string[]
   logLevel: 'debug' | 'info' | 'warn' | 'error'
