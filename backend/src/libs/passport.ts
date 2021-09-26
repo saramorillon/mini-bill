@@ -1,4 +1,4 @@
-import sha256 from 'crypto-js/sha256'
+import sha224 from 'crypto-js/sha224'
 import { User } from '../models/User'
 
 export function serializeUser(user: User, done: (err: unknown, id?: string) => void): void {
@@ -20,7 +20,7 @@ export function localStrategy(
   done: (error: unknown, user?: User) => void
 ): Promise<void> {
   return User.getRepository()
-    .findOne({ where: { username, password: sha256(password).toString() } })
+    .findOne({ where: { username, password: sha224(password).toString() } })
     .then((user) => {
       done(null, user)
     })

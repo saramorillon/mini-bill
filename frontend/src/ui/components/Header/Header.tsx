@@ -5,7 +5,7 @@ import { logout } from '../../../services/session'
 
 export function Header(): JSX.Element {
   return (
-    <Navbar colorVariant="primary">
+    <Navbar color="primary">
       <Navbar.Brand>
         <Navbar.Item renderAs={NavLink} to="/">
           <img src="/brand.svg" className="mr-2" /> Mini Invoices
