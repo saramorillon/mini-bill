@@ -1,8 +1,7 @@
-import React, { FormEvent, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { Button, Form, Icon, Section } from 'react-bulma-components'
 import { Key, Save, Trash2, User as _User } from 'react-feather'
 import { useSession } from '../../../contexts/SessionContext'
-import { useText } from '../../../hooks/useFields'
 import { useForm } from '../../../hooks/useForm'
 import { useIdParams } from '../../../hooks/useIdParams'
 import { deleteUser, getUser, saveUser } from '../../../services/users'
@@ -11,21 +10,10 @@ import { LoadContainer } from '../../components/Loader/Loader'
 export function User(): JSX.Element {
   const id = useIdParams()
   const fetch = useCallback(() => getUser(id), [id])
-  const { onSave, onDelete, loading, data: user, error } = useForm(fetch, saveUser, deleteUser)
+  const { onSave, onDelete, loading, values, error, handleChange } = useForm(fetch, saveUser, deleteUser)
   const session = useSession()
 
-  const [username, setUsername] = useText(user?.username || '')
-  const [password, setPasword] = useText(user?.password || '')
-
-  const onSubmit = useCallback(
-    (e: FormEvent) => {
-      e.preventDefault()
-      onSave({ ...user, username, password })
-    },
-    [onSave, user, username, password]
-  )
-
-  const disabled = user?.username === session.username
+  const disabled = values?.username === session.username
 
   if (error) {
     return <Section>Error 404</Section>
@@ -34,14 +22,14 @@ export function User(): JSX.Element {
   return (
     <Section>
       <LoadContainer loading={loading}>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSave}>
           <Form.Field>
             <Form.Label>Username</Form.Label>
             <Form.Control>
               <Form.Input
                 type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={values.username || ''}
+                onChange={(e) => handleChange('username', e.target.value)}
                 disabled={disabled}
               />
               <Icon align="left" size="small">
@@ -50,11 +38,11 @@ export function User(): JSX.Element {
             </Form.Control>
           </Form.Field>
 
-          {!user && (
+          {!values.password && (
             <Form.Field>
               <Form.Label>Password</Form.Label>
               <Form.Control>
-                <Form.Input type="password" value={password} onChange={(e) => setPasword(e.target.value)} />
+                <Form.Input type="password" value={''} onChange={(e) => handleChange('password', e.target.value)} />
                 <Icon align="left" size="small">
                   <Key />
                 </Icon>
@@ -72,9 +60,9 @@ export function User(): JSX.Element {
               </Button>
             </Form.Control>
 
-            {user && (
+            {id && (
               <Form.Control>
-                <Button type="button" color="primary" outlined onClick={() => onDelete(user)} disabled={disabled}>
+                <Button type="button" color="primary" outlined onClick={() => onDelete(id)} disabled={disabled}>
                   <Icon size="small">
                     <Trash2 />
                   </Icon>

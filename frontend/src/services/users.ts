@@ -15,7 +15,7 @@ export async function saveUser(user: Partial<IUser>): Promise<string> {
   return `/user/${id}`
 }
 
-export async function deleteUser(user: IUser): Promise<string> {
-  await Axios.delete(`/api/users/${user.id}`)
+export async function deleteUser(id: string | number): Promise<string> {
+  await Axios.delete(`/api/users/${id}`)
   return '/users'
 }
