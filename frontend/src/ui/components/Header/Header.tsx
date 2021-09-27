@@ -13,7 +13,10 @@ export function Header(): JSX.Element {
       </Navbar.Brand>
       <Navbar.Menu>
         <Navbar.Container>
-          <Navbar.Item renderAs={NavLink} to="/users">
+          <Navbar.Item renderAs={NavLink} to="/company" activeClassName="is-active">
+            My company
+          </Navbar.Item>
+          <Navbar.Item renderAs={NavLink} to="/users" activeClassName="is-active">
             Users
           </Navbar.Item>
         </Navbar.Container>

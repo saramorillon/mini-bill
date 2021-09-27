@@ -4,6 +4,7 @@ import { SessionProvider } from '../contexts/SessionContext'
 import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
 import { PrivateRoute, PublicRoute } from './components/Route/Route'
+import { Company } from './pages/Company/Company'
 import { Home } from './pages/Home/Home'
 import { Login } from './pages/Login/Login'
 import { User } from './pages/Users/User'
@@ -19,8 +20,11 @@ export function App(): JSX.Element | null {
             <Header />
             <Switch>
               <PrivateRoute exact path="/" component={Home} />
+
               <PrivateRoute exact path="/users" component={Users} />
               <PrivateRoute exact path="/user/:id?" component={User} />
+
+              <PrivateRoute exact path="/company" component={Company} />
             </Switch>
             <Footer />
           </Route>
