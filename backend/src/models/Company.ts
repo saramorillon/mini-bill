@@ -23,28 +23,28 @@ export class Company {
   @Column()
   name: string
 
-  @Column('char', { length: 9 })
+  @Column('char', { length: 9, default: '' })
   siren: string
 
-  @Column('char', { length: 14 })
+  @Column('char', { length: 14, default: '' })
   siret: string
 
-  @Column('char', { length: 12 })
+  @Column('char', { length: 12, default: '' })
   vat: string
 
-  @Column()
+  @Column({ default: '' })
   address1: string
 
-  @Column()
+  @Column({ default: '' })
   address2: string
 
-  @Column()
+  @Column({ default: '' })
   zipCode: string
 
-  @Column()
+  @Column({ default: '' })
   city: string
 
-  @Column()
+  @Column({ default: '' })
   country: string
 
   @CreateDateColumn()
